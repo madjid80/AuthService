@@ -18,8 +18,11 @@ function authenticateRequest (req, res, next) {
     req.user = username
     next()
   } catch (error) {
+    if (!error.status) {
+      error = new ApiErrorResponse(500, error.message)
+    }
     global.log.error(error)
-    res.status((error.status) ? error.status : 500 ).send(error.message)
+    res.status((error.status) ? error.status : 500 ).send(error.toJson())
   }
 }
 module.exports.authenticateRequest = authenticateRequest

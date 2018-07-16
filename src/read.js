@@ -1,5 +1,7 @@
 const User = require(global.MODELS_PATH+'/user.js')
 const UserToken = require(global.MODELS_PATH+'/user_token.js')
+const InviteResponse = require(global.MODELS_PATH+'/invite_response.js')
+const SdkInitData = require(global.MODELS_PATH+'/sdk_init_data.js')
 const ApiErrorResponse = require(global.MODELS_PATH+'/error.js')
 
 /**
@@ -19,11 +21,11 @@ function logIn (req, res) {
     }
     let userTokenOld = global.db.restore(user.getUserName(), "user_tokens")
     let userToken = new UserToken()
-    if(!userTokenOld){
+    if (!userTokenOld) {
         userToken.generateToken(user.toJson())
     } else {
       userToken.fromJson(userTokenOld)
-      if(!userToken.isValid()){
+      if (!userToken.isValid()) {
         userToken.generateToken(user.toJson())
       }
     } 
@@ -33,9 +35,46 @@ function logIn (req, res) {
     global.db.store(userToken.getToken(), user.getUserName(), "tokens")
     res.send(userToken.toJson()) 
   } catch (error) {
-    global.log.error(error.status)
-    global.log.error(error.message)
-    res.status((error.status) ? error.status : 500 ).send(error.message)
+    if (!error.status) {
+      error = new ApiErrorResponse(500, error.message)
+    }
+    global.log.error(error.toJson())
+    res.status((error.status) ? error.status : 500 ).send(error.toJson())
   }
 }
 module.exports.logIn= logIn
+
+function validateClientToken (req, res) {
+  try {
+    let body = req.body 
+    if (!body) {
+      throw new ApiErrorResponse(400, "Invalid invite provided")
+    }
+    if (!body.hasOwnProperty("inviteToken")) {
+      throw new ApiErrorResponse(400, "Invalid invite provided")
+    }
+    let inviteToken = global.db.restore(body.inviteToken, "generated_tokens")
+    if (!inviteToken) {
+      throw new ApiErrorResponse(404, "Invite Not Found")
+    }
+    let invitationObj = new InviteResponse()
+    invitationObj.fromJson(inviteToken)
+    if (!invitationObj.isValid()) {
+      throw new ApiErrorResponse(401, "Invite Expired")
+    }
+    let sdkInitData = new SdkInitData()
+    let tempData = global.db.restore(body.inviteToken, "sdk_init_client")
+    if (!tempData) {
+      throw new ApiErrorResponse(404, "Invite Not Found")
+    }
+    sdkInitData.fromJson(tempData)
+    res.send(sdkInitData.toJson()) 
+  } catch (error) {
+    if (!error.status) {
+      error = new ApiErrorResponse(500, error.message)
+    }
+    global.log.error(error)
+    res.status((error.status) ? error.status : 500 ).send(error.toJson())
+  }
+}
+module.exports.validateClientToken = validateClientToken

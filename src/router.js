@@ -9,16 +9,30 @@ function pong(req, res){
 }
 
 /**
- * ping for check status of this api
+ * ping for check status of this route
  *
  */
 app.get('/ping', pong);
 /**
+ *  Authentication middle ware to prevent unauthorized user access
+ *  
+ **/
+app.use('/invite/generate', auth.authenticateRequest)
+/**
  * generate token by admin
  * 
  **/ 
-app.use('/invite/generate', auth.authenticateRequest)
 app.post('/invite/generate', create.generateToken)
-
+/**
+ * This API only validate generated token
+ *
+ **/
+app.post('/invite/validate', read.validateClientToken)
+/**
+ *  This API is login for admin user
+ *  
+ **/
 app.post('/login', read.logIn)
+
+
 module.exports = app; 

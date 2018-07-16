@@ -1,4 +1,5 @@
 const config = require('config'); 
+const ApiErrorResponse = require(global.MODELS_PATH+'/error.js')
 
 class Config {
   constructor () {
@@ -18,10 +19,10 @@ class Config {
       if (port > 0 && port < 65535 ) {
         this._httpPort = port ; 
       } else {
-        throw new Error()
+        throw new ApiErrorResponse(400, "The port number is wrong")
       }
     } else {
-      throw new Error()
+      throw new ApiErrorResponse(400, "The port is missing")
     }
   }
 
@@ -33,7 +34,7 @@ class Config {
     if (httpAddr) {
       this._httpAddr = httpAddr
     } else {
-      throw new Error
+      throw new ApiErrorResponse(400, "The http address is missing")
     }
   }
 
@@ -46,7 +47,7 @@ class Config {
     if (logLevel) {
       this._loglevel = logLevel
     } else {
-      throw new Error()
+      throw new ApiErrorResponse(400, "The log level is missing")
     }
   }
   getLogPath () {
@@ -56,7 +57,7 @@ class Config {
     if (logPath) {
       this._logPath = logPath
     } else {
-      throw new Error()
+      throw new ApiErrorResponse(400, "The log path is missing")
     } 
   }
 }

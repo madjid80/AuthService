@@ -11,13 +11,13 @@ class Log {
   }
   debug () {
     var args = Array.prototype.slice.call(arguments)
-    args.unshift(" INFO ")
+    args.unshift(" DEUG ")
     args.unshift(new Date())
     this.print(args)
   }
   error () {
     var args = Array.prototype.slice.call(arguments)
-    args.unshift(" INFO ")
+    args.unshift(" ERROR ")
     args.unshift(new Date())
     this.print(args)
   }

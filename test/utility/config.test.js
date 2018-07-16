@@ -1,6 +1,9 @@
+global.MODELS_PATH = __dirname+"/../../src/models";
+global.UTILITY_PATH = __dirname+"/../../src/utility";
+global.MAIN_PATH = __dirname+"/../../src/";
 var expect = require('expect.js');
 var assert = require('assert');
-var Config = require(__dirname+'/../../src/utility/config.js');
+var Config = require(global.UTILITY_PATH+'/config.js');
 
 describe ('Test in memory Configs', function () {
   var config = null

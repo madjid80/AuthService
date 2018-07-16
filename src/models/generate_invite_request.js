@@ -1,3 +1,4 @@
+const ApiErrorResponse = require(global.MODELS_PATH+'/error.js')
 
 class GenerateInviteRequest {
   construct () {
@@ -5,7 +6,7 @@ class GenerateInviteRequest {
     this._clientId = "" 
     this._appKey = "" 
     this._appUrl = ""
-  }, 
+  }
   fromJson (obj) {
     if (obj.hasOwnProperty("userId")){
       this.setUserId(obj.userId)
@@ -31,10 +32,12 @@ class GenerateInviteRequest {
     }
   }
   toJson () {
-    userId: this._userId, 
-    clientId: this._clientId, 
-    appKey: this._appKey,
-    appUrl: this._appUrl
+    return {
+      userId: this._userId, 
+      clientId: this._clientId, 
+      appKey: this._appKey,
+      appUrl: this._appUrl
+    }
   }
   setUserId (userId) {
     this._userId = userId
@@ -61,3 +64,4 @@ class GenerateInviteRequest {
     return this._appUrl
   }
 }
+module.exports = GenerateInviteRequest

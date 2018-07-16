@@ -23,7 +23,13 @@ class InMemoryDb extends Db {
     this._storage[collection][key] = value
   }
   restore (key, collection = "default") {
-    return this._storage[collection]
+    if(!this._storage.hasOwnProperty(collection)){
+      return null
+    }
+    if(!this._storage[collection].hasOwnProperty(key)){
+      return null 
+    }
+    return this._storage[collection][key]
   }
 }
 module.exports = {

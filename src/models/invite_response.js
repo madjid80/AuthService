@@ -6,12 +6,12 @@ class InviteResponse {
     this._valiTo = "" 
   }
   fromJson (obj) {
-    if (!obj.hasOwnProperty("inviteToken")) {
+    if (obj.hasOwnProperty("inviteToken")) {
       this.setInviteToken(obj.inviteTolen)
     } else {
       throw new ApiErrorResponse(400, "inviteToken is missing")
     }
-    if (!obj.hasOwnProperty("validTo")) {
+    if (obj.hasOwnProperty("validTo")) {
       this.setValidTo(obj.validTo)
     } else {
       throw new ApiErrorResponse(400, "validToken is missing")

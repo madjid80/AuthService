@@ -6,12 +6,12 @@ class User {
     this._password = "" 
   }
   fromJson (obj) {
-    if (!obj.hasOwnProperty("username")){
+    if (obj.hasOwnProperty("username")){
       this.setUserName(obj.username)
     } else {
       throw new ApiErrorResponse(400, "username is missing")
     }
-    if (!obj.hasOwnProperty("password")){
+    if (obj.hasOwnProperty("password")){
       this.setPassword(obj.password)
     } else {
       throw new ApiErrorResponse(400, "password is missing")

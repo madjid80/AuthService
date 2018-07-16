@@ -3,6 +3,7 @@ global.UTILITY_PATH = __dirname+"/utility";
 global.MAIN_PATH = __dirname;
 
 const express = require('express')
+const bodyParser = require('body-parser')
 const Config = require("./utility/config.js")
 const Log = require("./utility/log.js")
 const http_server = express()
@@ -17,7 +18,7 @@ global.db = new InMemoryDb();
 global.db.store("madjid.80@gmail.com", "asdQWE123", "auth")
 
 //TODO I sould add versioning here
-http_server.use(express.json());
+http_server.use(bodyParser.json())
 http_server.use('/prospects/', router)
 http_server.listen(global.config.getHttpPort(), 
   global.config.getHttpAddr(),

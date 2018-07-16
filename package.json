@@ -10,6 +10,7 @@
   "author": "Madji Lashgarian",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "config": "^1.30.0",
     "expect.js": "^0.3.1",
     "express": "^4.16.3",

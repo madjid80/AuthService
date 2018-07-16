@@ -1,5 +1,5 @@
 const ApiErrorResponse = require(global.MODELS_PATH+'/error.js')
-
+const randomString = require('random-strr');
 class InviteResponse {
   constructor () {
     this._inviteToken = ""
@@ -7,7 +7,7 @@ class InviteResponse {
   }
   fromJson (obj) {
     if (obj.hasOwnProperty("inviteToken")) {
-      this.setInviteToken(obj.inviteTolen)
+      this.setInviteToken(obj.inviteToken)
     } else {
       throw new ApiErrorResponse(400, "inviteToken is missing")
     }
@@ -30,10 +30,20 @@ class InviteResponse {
     return this._inviteToken
   }
   setValidTo (validTo) {
-    this._validTo = validTo
+    this._validTo = new Date(validTo)
   }
   getValidTo () {
     return this._validTo
+  }
+  isValid () {
+    let today = new Date()
+    return this.getValidTo().getTime() - today.getTime() > 0
+  }
+  generate () {
+    this.setInviteToken(randomString({ min: 6, max: 12 }))
+    let today = new Date()
+    today.setDate(today.getDate()+7)
+    this.setValidTo(today)
   }
 }
 module.exports = InviteResponse

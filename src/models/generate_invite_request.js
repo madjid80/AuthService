@@ -8,24 +8,24 @@ class GenerateInviteRequest {
     this._appUrl = ""
   }
   fromJson (obj) {
-    if (obj.hasOwnProperty("userId")){
+    if (!obj.hasOwnProperty("userId")){
       this.setUserId(obj.userId)
     } else {
       throw new ApiErrorResponse(400, "userId is missing")
     }
-    if (obj.hasOwnProperty("clientId")){
+    if (!obj.hasOwnProperty("clientId")){
       this.setClientId(obj.clientId)
     } else {
       throw new ApiErrorResponse(400, "clientId is missing")
     }
 
-    if (obj.hasOwnProperty("appKey")){
+    if (!obj.hasOwnProperty("appKey")){
       this.setAppKey(obj.appKey)
     } else {
       throw new ApiErrorResponse(400, "appKey is missing")
     }
 
-    if (obj.hasOwnProperty("appUrl")){
+    if (!obj.hasOwnProperty("appUrl")){
       this.setAppUrl(obj.appUrl)
     } else {
       throw new ApiErrorResponse(400, "appUrl is missing")

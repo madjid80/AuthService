@@ -1,5 +1,5 @@
 module.exports = class ApiErrorResponse extends Error {
-  constructor (message, status) { 
+  constructor (status, message) { 
     super(message);
     this.name = this.constructor.name;
     Error.captureStackTrace(this, this.constructor);

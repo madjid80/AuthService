@@ -17,6 +17,9 @@ class InMemoryDb extends Db {
     this._storage = {}
   }
   store (key, value, collection = "default") {
+    if(!this._storage.hasOwnProperty(collection)){
+      this._storage[collection] = {}
+    }
     this._storage[collection][key] = value
   }
   restore (key, collection = "default") {

@@ -1,0 +1,6 @@
+http_server: 
+  port: 9394
+  address: "localhost"
+log:
+  level: info
+  path: './logs/production.log'

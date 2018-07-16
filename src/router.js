@@ -24,15 +24,23 @@ app.use('/invite/generate', auth.authenticateRequest)
  **/ 
 app.post('/invite/generate', create.generateToken)
 /**
+ * because it's a public API so we need check throttle
+ **/
+app.use('/invite/validate', auth.throttle)
+/**
  * This API only validate generated token
  *
  **/
 app.post('/invite/validate', read.validateClientToken)
 /**
+ * because it's a public API so we need check throttle
+ **/
+app.use('/login', auth.throttle)
+
+/**
  *  This API is login for admin user
  *  
  **/
 app.post('/login', read.logIn)
-
 
 module.exports = app; 

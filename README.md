@@ -27,9 +27,31 @@ export NODE_ENV=production
 ```
 now you install dependency and ready to run code on your local computer.
 ## Run code
-## Run Tests
+To run the application you have three choices: 
+1. Run it in the command line without any monitoring and process managment service:
+For this purpose you can write below command to run this application stand alone:
+```
+npm start
+````
+If you need to run test script only write below command to trigger all test script with Mocha framework:
+```
+npm test
+```
+2. Run it under PM2 process managment
+THIS SECTION WILL BE READY ASAP
+3. Run it as a docker container 
+THIS SECTION WILL BE READY ASAP
 
 # User flow 
+1. The App Admin generates an invitation token using a web app as shown below
+2. The invite token is then used to login into the Catalyst Experience App
+  - Client enter validation token and send it to validate
+  - The outcome of the action above can be either a successful login or the user is
+asked to retry.
+Notes: 
+* The invite token validation logic needs to be throttled
+** The admin endpoints should be authenticated. 
+*** An admin can get an overview of active and inactive tokens
 ## Admin Login
 ## Generate invite code 
 ## validate invite code 

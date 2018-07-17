@@ -33,6 +33,7 @@ For this purpose you can write below command to run this application stand alone
 ```
 npm start
 ````
+**Note that if you want run this app on 443 or 80 ports you should run it with root privilage user**
 If you need to run test script only write below command to trigger all test script with Mocha framework:
 ```
 npm test
@@ -67,18 +68,72 @@ curl -X POST \
   "password": "asdQWE123"
 }'
 ``` 
-** Note that because https certificate is a self-signed certificate you need to add it to your trusted certificate **
+**Note that because https certificate is a self-signed certificate you need to add it to your trusted certificate**
+In response of the above request you can see following json object: 
+```
+{
+    "token": "5jLn6A/yr6Lf/VE8lfXtGbg6UH0+JQDJ+6ScWqsSNOpXm8qDZniqeUW8WLxnx3mX8nygILyUlAnQmqUhlUT+Cg==",
+    "createdAt": "2018-07-17T09:44:06.406Z"
+}
+```
+If you want to send a request to a restricted API then you should put a token field in header and filled it with responsed token string which come from login API.
 ## Generate invite code 
+The generate invite token done by an authenticated admin user which pass pervious step and add token in header request.To generate new invite token you can run below sample request:
+```
+curl -X POST \
+  http://127.0.0.1:9394/prospects/invite/generate \
+  -H 'Cache-Control: no-cache' \
+  -H 'Content-Type: application/json' \
+  -H 'token: jprXHabOpnP7BWuiKFKHYOeK9tWjn/h3lqAiH87sw+MDEMKFqRcMSla58HDM0Bx+mxyyOymjGr/MOaNISBZPRg==' \
+  -H 'version: v0' \
+  -d '{
+  "userId": "madjid.80@gmail.com",
+  "clientId": 50,
+  "appKey": "4d4f434841-373836313836303830-3430-616e64726f6964",
+  "appUrl": "https://test.pulseid.com/2.1"
+}'
+```
+**please note, the userId attribute should filled with admin id, it means it should exactly same as login username otherwise the API response 401 access denied**
+In response of the above request you can see following json object: 
+```
+{
+    "inviteToken": "uD@zOUH]Pf-5",
+    "validTo": "2018-07-23T21:22:42.748Z"
+}
+```
+Now you can send above inviteToken to client to enter to validate.
 ## validate invite code 
-
+For validate API you should have inviteToken which you can give it from pervious step. To validate your invite code you should send it to validate API like below:
+```
+curl -X POST \
+  http://127.0.0.1:9394/prospects/invite/validate \
+  -H 'Cache-Control: no-cache' \
+  -H 'Content-Type: application/json' \
+  -H 'Postman-Token: cc962472-0985-44fc-abe4-4e81c795b4a6' \
+  -d '{
+  "inviteToken": "uD@zOUH]Pf-5"
+}'
+```
+In response of the above request you can see following json object: 
+```
+{
+    "appKey": "4d4f434841-373836313836303830-3430-616e64726f6964",
+    "appUrl": "https://test.pulseid.com/2.1"
+}
+```
 # Directory hirechary 
 ## /src 
+  These directory contain all app code. The entry point of app in 'main.js'. The route definition is inside of 'route.js' file. You can find all models definition under 'models' directory. There is an extra directory which name is 'utility' and contain general and utility classes.  
 ## /config
+  In these directory you can find confiuration file which read when app is running. 
 ## /test
+  In these directory you can find all test scenario with mocha test framework. 
+## /https_certs
+  In these directory you can find https certificate. please note that these certificates is self-signed certificate.
 
 # Code design and architect 
 ## logging
-## config 
+## configs
 ## auth middle ware
 ## throttle middle ware 
 ## models 

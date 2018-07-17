@@ -43,16 +43,19 @@ THIS SECTION WILL BE READY ASAP
 THIS SECTION WILL BE READY ASAP
 
 # User flow 
-1. The App Admin generates an invitation token using a web app as shown below
-2. The invite token is then used to login into the Catalyst Experience App
-  - Client enter validation token and send it to validate
-  - The outcome of the action above can be either a successful login or the user is
+1. [x] The App Admin generates an invitation token using a web app as shown below
+2. [x] The invite token is then used to login into the Catalyst Experience App
+  - [x] Client enter validation token and send it to validate
+  - [x] The outcome of the action above can be either a successful login or the user is
 asked to retry.
+
 Notes: 
-* The invite token validation logic needs to be throttled
-** The admin endpoints should be authenticated. 
-*** An admin can get an overview of active and inactive tokens
+- [x] The invite token validation logic needs to be throttled
+- [x] The admin endpoints should be authenticated. 
+- [] An admin can get an overview of active and inactive tokens
+
 ## Admin Login
+
 ## Generate invite code 
 ## validate invite code 
 

@@ -3,7 +3,7 @@ const ApiErrorResponse = require(global.MODELS_PATH+'/error.js')
 
 class Config {
   constructor () {
-   this._httpPort = 80
+   this._httpPort = 443
    this._httpAddr = "localhost"
    this._logLevel = "info"
    this._logPath = "/dev/stdout"

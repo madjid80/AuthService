@@ -12,17 +12,17 @@ describe ('Test in memory Configs', function () {
     done()
   }) 
   describe ('set http port', function () {
-    it ('set and get 80 port number', function () {
-      config.setHttpPort(80)
-      assert.equal(config.getHttpPort(), 80)
+    it ('set and get 443 port number', function () {
+      config.setHttpPort(443)
+      assert.equal(config.getHttpPort(), 443)
     })
     it ('set and get -1 as port number', function () {
       expect(config.setHttpPort).withArgs(-1).to.throwException()
-      assert(config.getHttpPort(), 80)
+      assert(config.getHttpPort(), 443)
     })
     it ('set and get 65536 as port number', function () {
       expect(config.setHttpPort).withArgs(65536).to.throwException()
-      assert(config.getHttpPort(), 80)
+      assert(config.getHttpPort(), 443)
     })
   })
   describe ('set http address', function () {
@@ -53,20 +53,20 @@ describe ('Test file Configs', function () {
   }) 
   describe ('set http port', function () {
     it ('get 80 port number', function () {
-      assert.equal(config.getHttpPort(), 80)
+      assert.equal(config.getHttpPort(), 443)
     })
     it ('set and get -1 as port number', function () {
       expect(config.setHttpPort).withArgs(-1).to.throwException()
-      assert(config.getHttpPort(), 80)
+      assert(config.getHttpPort(), 443)
     })
     it ('set and get 65536 as port number', function () {
       expect(config.setHttpPort).withArgs(65536).to.throwException()
-      assert(config.getHttpPort(), 80)
+      assert(config.getHttpPort(), 443)
     })
   })
   describe ('set http address', function () {
     it ('set and get address field', function () {
-      assert.equal(config.getHttpAddr(), "127.0.0.1")
+      assert.equal(config.getHttpAddr(), "localhost")
     })
   })
   describe ('set log level', function () {

@@ -1,9 +1,9 @@
 global.MODELS_PATH = __dirname+"/../../src/models";
 global.UTILITY_PATH = __dirname+"/../../src/utility";
 global.MAIN_PATH = __dirname+"/../../src/";
-var expect = require('expect.js');
-var assert = require('assert');
-var InviteResponse = require(global.MODELS_PATH+'/invite_response.js');
+const expect = require('expect.js');
+const assert = require('assert');
+const InviteResponse = require(global.MODELS_PATH+'/invite_response.js');
 describe ('Test invite response models', function () {
   var inviteResponse = null
   beforeEach (function (done) {
@@ -36,4 +36,13 @@ describe ('Test invite response models', function () {
     it ('set and get not valid validTo', function () {
     })
   })
+  describe ('generate new invite token ', function () {
+    it ('generate new token', function () {
+    })
+  })
+  describe ('validate invite token ', function () {
+    it ('validate invite token test ', function () {
+    })
+  })
+
 })

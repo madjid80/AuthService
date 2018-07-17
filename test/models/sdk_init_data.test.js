@@ -3,21 +3,17 @@ global.UTILITY_PATH = __dirname+"/../../src/utility";
 global.MAIN_PATH = __dirname+"/../../src/";
 const expect = require('expect.js');
 const assert = require('assert');
-const GenerateInviteRequest = require(global.MODELS_PATH+'/generate_invite_request.js');
-describe ('Test generate invite request models', function () {
-  var generateInviteRequest = null
+const SdkInitData = require(global.MODELS_PATH+'/sdk_init_data.js');
+describe ('Test sdk init data models', function () {
+  var sdkInitData = null
   beforeEach (function (done) {
-    generateInviteRequest = new GenerateInviteRequest()
+    sdkInitData = new SdkInitData()
     done()
   }) 
   describe ('fromJson Test', function () {
     it ('full json', function () {
     })
-    it ('miss userId from json ', function () {
-    })
-    it ('miss clientId from json', function () {
-    })
-    it ('miss appKey from json', function () {
+    it ('miss appkey from json ', function () {
     })
     it ('miss appUrl from json', function () {
     })
@@ -26,18 +22,6 @@ describe ('Test generate invite request models', function () {
     it ('full json', function () {
     })
     it ('default json', function () {
-    })
-  })
-  describe ('set and get userId', function () {
-    it ('set and get valid userId', function () {
-    })
-    it ('set and get not valid userId', function () {
-    })
-  })
-  describe ('set and get clientId', function () {
-    it ('set and get valid clientId', function () {
-    })
-    it ('set and get not valid clientId', function () {
     })
   })
   describe ('set and get appKey', function () {
@@ -53,4 +37,3 @@ describe ('Test generate invite request models', function () {
     })
   })
 })
-

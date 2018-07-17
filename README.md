@@ -34,6 +34,7 @@ For this purpose you can write below command to run this application stand alone
 npm start
 ````
 **Note that if you want run this app on 443 or 80 ports you should run it with root privilage user**
+
 If you need to run test script only write below command to trigger all test script with Mocha framework:
 ```
 npm test
@@ -69,6 +70,7 @@ curl -X POST \
 }'
 ``` 
 **Note that because https certificate is a self-signed certificate you need to add it to your trusted certificate**
+
 In response of the above request you can see following json object: 
 ```
 {
@@ -94,6 +96,7 @@ curl -X POST \
 }'
 ```
 **please note, the userId attribute should filled with admin id, it means it should exactly same as login username otherwise the API response 401 access denied**
+
 In response of the above request you can see following json object: 
 ```
 {
@@ -140,4 +143,4 @@ In response of the above request you can see following json object:
 ## Apis
 
 # Run in docker
-
+**COMING SOON**

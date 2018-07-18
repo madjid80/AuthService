@@ -76,6 +76,11 @@ describe ('Test authentication middle ware', function () {
       var next = sinon.fake()
       for (let i = 0 ; i < 20 ; i++) {
         auth.throttle(req, res, next)
+        if (i > 10) {
+          assert.equal(res._status, 401)
+          assert.equal(res._body.error_code, 401 )  
+          assert.equal(res._body.error_message, "too many requests") 
+        }
       }
       assert.equal(next.callCount,11)
       assert.equal(res._status, 401)

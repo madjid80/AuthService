@@ -17,7 +17,7 @@ global.config = new Config.FileConfig()
 global.config.readConfig()
 global.log = new Log.Console(); 
 global.db = new InMemoryDb();
-global.db.store("madjid.80@gmail.com", "asdQWE123", "auth")
+global.db.store("admin@mail.com", "123456", "auth")
 
 //TODO I sould add versioning here
 http_server.use(bodyParser.json())

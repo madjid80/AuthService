@@ -11,7 +11,7 @@ function logIn (req, res) {
   try {
     let body = req.body 
     if(!body){
-      throw new ApiErrorResponse(400, "The body is missing")
+      throw new ApiErrorResponse(400, "Invalid request parameters")
     }
     let user = new User()
     user.fromJson(body)
